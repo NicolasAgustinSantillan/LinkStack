@@ -255,3 +255,37 @@ function block_text($text) {
 function bt($text) {
   return block_text($text);
 }
+
+/**
+ * Generates the QR code of a URL with the Antares logo as watermark in the center.
+ * Returns a data URI and the image type ("png" with imagick, "svg" otherwise).
+ */
+function qrCodeImage(string $url, int $size = 1000): array
+{
+    $argValues = config('advanced-config.qr_code_gradient') ?? [0, 0, 0, 0, 0, 0, 'diagonal'];
+    list($arg1, $arg2, $arg3, $arg4, $arg5, $arg6, $arg7) = $argValues;
+
+    // High error correction so the code still scans with the logo covering the center
+    $qr = \SimpleSoftwareIO\QrCode\Facades\QrCode::size($size)->margin(1)->errorCorrection('H')
+        ->gradient($arg1, $arg2, $arg3, $arg4, $arg5, $arg6, $arg7)
+        ->eye('circle')->style('round');
+
+    $logo = base_path('assets/linkstack/images/antares/antares-isotipo.jpg');
+
+    if (extension_loaded('imagick')) {
+        if (file_exists($logo)) {
+            $qr = $qr->merge($logo, .26, true);
+        }
+        return ['data:image/png;base64,' . base64_encode($qr->format('png')->generate($url)), 'png'];
+    }
+
+    // SVG cannot merge images: embed the logo on top of the code instead
+    $svg = (string) $qr->generate($url);
+    if (file_exists($logo)) {
+        $logoSize = $size * .26;
+        $offset = ($size - $logoSize) / 2;
+        $href = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($logo));
+        $svg = str_replace('</svg>', '<image x="' . $offset . '" y="' . $offset . '" width="' . $logoSize . '" height="' . $logoSize . '" href="' . $href . '"/></svg>', $svg);
+    }
+    return ['data:image/svg+xml;base64,' . base64_encode($svg), 'svg'];
+}

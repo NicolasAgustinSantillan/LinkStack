@@ -1,0 +1,15 @@
+.git
+.github
+.claude
+.idea
+.vscode
+node_modules
+vendor
+release
+docker/docker-compose*.yml
+docker/release.ps1
+storage/logs/*.log
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*.php
+bootstrap/cache/*.php

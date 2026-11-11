@@ -1063,4 +1063,19 @@ return array (
 
 'Add new link' => 'Agregar nuevo enlace',
 
+    'pwa' => [
+        'my_qr' => 'Mi QR',
+        'my_qr_desc' => 'Mostrar mi código QR a pantalla completa',
+        'title' => 'Mi código QR',
+        'hint' => 'Mostrá este código para que lo escaneen y abran tu perfil.',
+        'share' => 'Compartir enlace',
+        'open_profile' => 'Ver perfil',
+        'back' => 'Volver al panel',
+        'offline' => 'Sin conexión: mostrando el QR guardado.',
+        'install_title' => 'Tenelo siempre a mano',
+        'install_android' => 'Android: instalá la app desde el menú de Chrome (Instalar app). Después mantené presionado el ícono de la app, tocá y arrastrá "Mi QR" a la pantalla de inicio.',
+        'install_button' => 'Instalar app',
+        'copied' => 'Enlace copiado',
+    ],
+
 );

@@ -1,0 +1,24 @@
+# Entorno local: construye la imagen desde este repo.
+#   docker compose -f docker/docker-compose.yml up -d --build
+#   http://localhost:8080
+name: antares-linkstack-local
+
+services:
+  linkstack:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: antares-linkstack:local
+    container_name: linkstack-local
+    restart: unless-stopped
+    environment:
+      - TZ=America/Argentina/Buenos_Aires
+      - HTTP_SERVER_NAME=localhost
+      - FORCE_HTTPS=false
+    ports:
+      - "8080:80"
+    volumes:
+      - linkstack_local_data:/htdocs
+
+volumes:
+  linkstack_local_data:

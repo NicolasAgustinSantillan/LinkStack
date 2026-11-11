@@ -166,6 +166,19 @@ class UserController extends Controller
         return view('linkstack.linkstack', ['userinfo' => $userinfo, 'information' => $information, 'links' => $links, 'littlelink_name' => $littlelink_name]);
     }
 
+    //Full screen QR code of the logged in user (target of the PWA shortcut)
+    public function showQr()
+    {
+        $user = Auth::user();
+        $qrURL = url('/u/' . $user->id);
+
+        list($qrSrc) = qrCodeImage($qrURL);
+
+        return response()
+            ->view('qr', ['user' => $user, 'qrURL' => $qrURL, 'qrSrc' => $qrSrc])
+            ->header('Cache-Control', 'private, no-cache');
+    }
+
     //Redirect to user page
     public function userRedirect(request $request)
     {

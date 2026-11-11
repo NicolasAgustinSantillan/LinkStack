@@ -1137,4 +1137,19 @@ return [
     'next' => 'Next &raquo;',
 
 
+    'pwa' => [
+        'my_qr' => 'My QR',
+        'my_qr_desc' => 'Show my QR code full screen',
+        'title' => 'My QR code',
+        'hint' => 'Show this code so others can scan it and open your profile.',
+        'share' => 'Share link',
+        'open_profile' => 'Open profile',
+        'back' => 'Back to dashboard',
+        'offline' => 'Offline: showing the saved QR code.',
+        'install_title' => 'Have it always at hand',
+        'install_android' => 'Android: install the app from the Chrome menu (Install app). Then long-press the app icon, hold "My QR" and drag it to your home screen.',
+        'install_button' => 'Install app',
+        'copied' => 'Link copied',
+    ],
+
 ];

@@ -22,6 +22,34 @@ use App\Models\User;
 |
 */
 
+// PWA manifest (installable app + "My QR" shortcut). Registered before the installer catch-all.
+Route::get('/manifest.webmanifest', function () {
+  return response()->json([
+    'name' => env('APP_NAME', 'LinkStack'),
+    'short_name' => env('APP_NAME', 'LinkStack'),
+    'id' => '/dashboard',
+    'start_url' => '/dashboard',
+    'scope' => '/',
+    'display' => 'standalone',
+    'orientation' => 'portrait',
+    'background_color' => '#ffffff',
+    'theme_color' => '#7ad21c',
+    'icons' => [
+      ['src' => '/assets/linkstack/images/pwa/icon-192.png', 'sizes' => '192x192', 'type' => 'image/png', 'purpose' => 'any'],
+      ['src' => '/assets/linkstack/images/pwa/icon-512.png', 'sizes' => '512x512', 'type' => 'image/png', 'purpose' => 'any'],
+      ['src' => '/assets/linkstack/images/pwa/maskable-192.png', 'sizes' => '192x192', 'type' => 'image/png', 'purpose' => 'maskable'],
+      ['src' => '/assets/linkstack/images/pwa/maskable-512.png', 'sizes' => '512x512', 'type' => 'image/png', 'purpose' => 'maskable'],
+    ],
+    'shortcuts' => [[
+      'name' => __('messages.pwa.my_qr'),
+      'short_name' => __('messages.pwa.my_qr'),
+      'description' => __('messages.pwa.my_qr_desc'),
+      'url' => '/qr',
+      'icons' => [['src' => '/assets/linkstack/images/pwa/shortcut-qr-192.png', 'sizes' => '192x192', 'type' => 'image/png']],
+    ]],
+  ], 200, ['Content-Type' => 'application/manifest+json'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+})->name('pwaManifest');
+
 // Prevents section below from being run by 'composer update'
 if(file_exists(base_path('storage/app/ISINSTALLED'))){
   // generates new APP KEY if no one is set
@@ -99,6 +127,7 @@ Route::group([
 if(env('FORCE_ROUTE_HTTPS') == 'true'){URL::forceScheme('https');}
 if(isset($_COOKIE['LinkCount'])){if($_COOKIE['LinkCount'] == '20'){$LinkPage = 'showLinks20';}elseif($_COOKIE['LinkCount'] == '30'){$LinkPage = 'showLinks30';}elseif($_COOKIE['LinkCount'] == 'all'){$LinkPage = 'showLinksAll';} else {$LinkPage = 'showLinks';}} else {$LinkPage = 'showLinks';} //Shows correct link number
 Route::get('/dashboard', [AdminController::class, 'index'])->name('panelIndex');
+Route::get('/qr', [UserController::class, 'showQr'])->name('showQr');
 Route::get('/studio/index', function(){return redirect(url('dashboard'));});
 Route::get('/studio/add-link', [UserController::class, 'AddUpdateLink'])->name('showButtons');
 Route::post('/studio/edit-link', [UserController::class, 'saveLink'])->name('addLink');

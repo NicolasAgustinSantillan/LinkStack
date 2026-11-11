@@ -1,0 +1,34 @@
+# Stack del servidor (QA) detrás de Traefik.
+# La imagen se publica con docker/release.ps1
+services:
+  linkstack:
+    image: registry.antaresautomation.com/antares-linkstack:latest
+    container_name: linkstack
+    restart: unless-stopped
+    environment:
+      - TZ=America/Argentina/Buenos_Aires
+      - HTTP_SERVER_NAME=linkstack-qa.antaresautomation.com
+      - HTTPS_SERVER_NAME=linkstack-qa.antaresautomation.com
+      - FORCE_HTTPS=true
+    volumes:
+      - linkstack_data:/htdocs
+    networks:
+      - database-antares-net
+      - reverse-proxy-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.antares-linkstack.rule=Host(`linkstack-qa.antaresautomation.com`)"
+      - "traefik.http.routers.antares-linkstack.entrypoints=websecure"
+      - "traefik.http.routers.antares-linkstack.tls=true"
+      - "traefik.http.routers.antares-linkstack.tls.certresolver=letsencrypt"
+      - "traefik.http.services.antares-linkstack.loadbalancer.server.port=80"
+      - "traefik.docker.network=reverse-proxy-net"
+
+networks:
+  database-antares-net:
+    external: true
+  reverse-proxy-net:
+    external: true
+
+volumes:
+  linkstack_data:

@@ -62,6 +62,7 @@ $usrhandl = Auth::user()->littlelink_name;
       <link rel="stylesheet" href="{{asset('assets/css/rtl.min.css')}}" />
       
 	  <meta name="csrf-token" content="{{ csrf_token() }}">
+	  @include('layouts.pwa')
 	  <link rel="stylesheet" href="{{ asset('assets/linkstack/css/hover-min.css') }}">
 	  <link rel="stylesheet" href="{{ asset('assets/linkstack/css/animate.css') }}">
 	  <link rel="stylesheet" href="{{ asset('assets/external-dependencies/bootstrap-icons.css') }}">
@@ -309,6 +310,7 @@ $usrhandl = Auth::user()->littlelink_name;
                       @endif
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" data-bs-toggle="modal" style="cursor:pointer!important;" data-bs-target="#staticBackdrop"><i class="bi bi-qr-code-scan"></i> {{__('messages.QR Code')}}</a></li>
+                      <li><a class="dropdown-item" href="{{ route('showQr') }}"><i class="bi bi-phone"></i> {{__('messages.pwa.my_qr')}}</a></li>
                     </ul>
                   </div>
                 </li>
@@ -683,20 +685,7 @@ $usrhandl = Auth::user()->littlelink_name;
               try {
                 $redirectURL = url('').'/'.'u/'.Auth::user()->id;
 
-                $argValues = config('advanced-config.qr_code_gradient') ?? [0, 0, 0, 0, 0, 0, 'diagonal'];
-                list($arg1, $arg2, $arg3, $arg4, $arg5, $arg6, $arg7) = $argValues;
-
-                if (extension_loaded('imagick')) {
-                  $imgSrc = QrCode::format('png')->gradient($arg1, $arg2, $arg3, $arg4, $arg5, $arg6, $arg7)->eye('circle')->style('round')->size(1000)->generate($redirectURL);
-                  $imgSrc = base64_encode($imgSrc);
-                  $imgSrc = 'data:image/png;base64,' . $imgSrc;
-                  $imgType = 'png';
-                } else {
-                  $imgSrc = QrCode::gradient($arg1, $arg2, $arg3, $arg4, $arg5, $arg6, $arg7)->eye('circle')->style('round')->size(1000)->generate($redirectURL);
-                  $imgSrc = base64_encode($imgSrc);
-                  $imgSrc = 'data:image/svg+xml;base64,' . $imgSrc;
-                  $imgType = 'svg';
-                }
+                list($imgSrc, $imgType) = qrCodeImage($redirectURL);
 
               } catch(exception $e) {
                 $imgSrc = url('/assets/linkstack/images/themes/no-preview.png');
@@ -712,6 +701,7 @@ $usrhandl = Auth::user()->littlelink_name;
                 @if($imgType == 'png')
                   <button type="button" class="btn btn-info" id="downloadButton">{{__('messages.Download')}}</button>
                 @endif
+                  <a href="{{ route('showQr') }}" class="btn btn-primary"><i class="bi bi-fullscreen"></i> {{__('messages.pwa.my_qr')}}</a>
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('messages.Close')}}</button>
               </div>
           </div>
