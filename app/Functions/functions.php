@@ -260,6 +260,12 @@ function bt($text) {
  * Generates the QR code of a URL with the Antares logo as watermark in the center.
  * Returns a data URI and the image type ("png" with imagick, "svg" otherwise).
  */
+// Public profile URL used by the QR codes: /@name, or /u/<id> while the user has no name yet
+function profileUrl($user): string
+{
+    return $user->littlelink_name ? url('/@' . $user->littlelink_name) : url('/u/' . $user->id);
+}
+
 function qrCodeImage(string $url, int $size = 1000): array
 {
     $argValues = config('advanced-config.qr_code_gradient') ?? [0, 0, 0, 0, 0, 0, 'diagonal'];

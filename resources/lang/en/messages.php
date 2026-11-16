@@ -1150,6 +1150,8 @@ return [
         'install_android' => 'Android: install the app from the Chrome menu (Install app). Then long-press the app icon, hold "My QR" and drag it to your home screen.',
         'install_button' => 'Install app',
         'copied' => 'Link copied',
+        'profile_qr_hint' => 'Scan to open this profile',
+        'profile_qr_enlarge' => 'Enlarge QR code',
     ],
 
 ];

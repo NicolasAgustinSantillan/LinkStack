@@ -1076,6 +1076,8 @@ return array (
         'install_android' => 'Android: instalá la app desde el menú de Chrome (Instalar app). Después mantené presionado el ícono de la app, tocá y arrastrá "Mi QR" a la pantalla de inicio.',
         'install_button' => 'Instalar app',
         'copied' => 'Enlace copiado',
+        'profile_qr_hint' => 'Escaneá para abrir este perfil',
+        'profile_qr_enlarge' => 'Ampliar código QR',
     ],
 
 );

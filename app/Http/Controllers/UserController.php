@@ -170,7 +170,7 @@ class UserController extends Controller
     public function showQr()
     {
         $user = Auth::user();
-        $qrURL = url('/u/' . $user->id);
+        $qrURL = profileUrl($user);
 
         list($qrSrc) = qrCodeImage($qrURL);
 

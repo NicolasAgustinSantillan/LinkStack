@@ -683,7 +683,7 @@ $usrhandl = Auth::user()->littlelink_name;
               </div>
               @php
               try {
-                $redirectURL = url('').'/'.'u/'.Auth::user()->id;
+                $redirectURL = profileUrl(Auth::user());
 
                 list($imgSrc, $imgType) = qrCodeImage($redirectURL);
 
