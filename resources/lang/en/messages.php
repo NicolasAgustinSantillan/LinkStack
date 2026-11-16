@@ -1156,14 +1156,14 @@ return [
 
     'templates' => [
         'title' => 'New user templates',
-        'intro' => 'Links added automatically when a user is created. Choose which template to apply when adding a user; each user can edit their links afterwards.',
+        'intro' => 'Links loaded into a user from Edit user, with "Apply template?". Each user can edit their links afterwards.',
         'empty' => 'There are no templates yet.',
         'new' => 'New template',
         'items' => 'Items',
         'items_hint' => 'They are added to the user page in this order.',
         'add_item' => 'Add item',
         'default' => 'Default',
-        'is_default' => 'Preselect it when creating users',
+        'is_default' => 'Show it first in the list',
         'type' => 'Type',
         'type_link' => 'Link',
         'type_predefined' => 'Brand button',
@@ -1172,9 +1172,10 @@ return [
         'site_icon' => 'Use the website icon',
         'saved' => 'Template saved',
         'confirm_delete' => 'Delete this template? Existing users are not changed.',
-        'apply' => 'Template:',
-        'none' => 'No template',
         'manage' => 'Edit templates',
+        'apply_question' => 'Apply template?',
+        'apply_hint' => 'On save, adds the template links after the ones the user already has.',
+        'view_links' => 'View their links (:count)',
     ],
 
 ];

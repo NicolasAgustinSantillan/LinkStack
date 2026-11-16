@@ -196,8 +196,7 @@ Route::group([
     Route::get('/admin/templates', [UserTemplateController::class, 'index'])->name('showTemplates');
     Route::get('/admin/templates/{id}', [UserTemplateController::class, 'edit'])->name('editTemplate');
     Route::post('/admin/templates/{id}', [UserTemplateController::class, 'save'])->name('saveTemplate');
-    Route::post('/admin/templates/{id}/delete', [UserTemplateController::class, 'delete'])->name('deleteTemplate');
-    Route::post('/admin/delete-table-user/{id}', [AdminController::class, 'deleteTableUser'])->name('deleteTableUser');
+    Route::post('/admin/templates/{id}/delete', [UserTemplateController::class, 'delete'])->name('deleteTemplate');    Route::post('/admin/delete-table-user/{id}', [AdminController::class, 'deleteTableUser'])->name('deleteTableUser');
     Route::get('/admin/pages', [AdminController::class, 'showSitePage'])->name('showSitePage');
     Route::post('/admin/pages', [AdminController::class, 'editSitePage'])->name('editSitePage');
     Route::get('/admin/advanced-config', [AdminController::class, 'showFileEditor'])->name('showFileEditor');

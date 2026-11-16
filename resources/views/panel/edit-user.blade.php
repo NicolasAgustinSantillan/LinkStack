@@ -126,13 +126,35 @@
                                 <option <?= ($user->role === strtolower('admin')) ? 'selected' : '' ?>>admin</option>
                               </select>
                             </div>
+                            @php
+                              $templates = \App\Models\UserTemplate::orderByDesc('is_default')->orderBy('name')->get();
+                              $linkCount = \App\Models\Link::where('user_id', $user->id)->count();
+                            @endphp
+                            @if($templates->isNotEmpty())
+                            <div class="form-group col-lg-8 mt-3">
+                              <div class="d-flex flex-wrap gap-2 align-items-center">
+                                <div class="form-check mb-0">
+                                  {{-- Checked for new users (no links yet), so Save loads the template once --}}
+                                  <input class="form-check-input" type="checkbox" name="apply_template" value="1" id="apply_template" @checked($linkCount == 0)>
+                                  <label class="form-check-label" for="apply_template">{{__('messages.templates.apply_question')}}</label>
+                                </div>
+                                <select name="template" class="form-select w-auto">
+                                  @foreach($templates as $template)
+                                    <option value="{{ $template->id }}">{{ $template->name }}</option>
+                                  @endforeach
+                                </select>
+                                <a href="{{ route('showTemplates') }}" class="small">{{__('messages.templates.manage')}}</a>
+                              </div>
+                              <small class="text-muted">{{__('messages.templates.apply_hint')}} <a href="{{ route('showLinksUser', $user->id) }}">{{__('messages.templates.view_links', ['count' => $linkCount])}}</a></small>
+                            </div>
+                            @endif
                             @endforeach
                             <button type="submit" class="mt-3 ml-3 btn btn-primary">{{__('messages.Save')}}</button>
                           </form>
-                  
+
                             </div>
                   </section>
-  
+
                     </div>
                 </div>
              </div>

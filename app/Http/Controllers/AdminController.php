@@ -241,11 +241,6 @@ class AdminController extends Controller
       "block" => "no",
     ]);
 
-    // Links from the template chosen in Admin → Users
-    if ($template = UserTemplate::find(request("template"))) {
-      $template->applyTo($user);
-    }
-
     return redirect("admin/edit-user/" . $user->id);
   }
 
@@ -391,6 +386,11 @@ class AdminController extends Controller
         base_path("assets/img/background-img/"),
         $id . "_" . time() . "." . $request->file("background")->extension(),
       );
+    }
+
+    // "Apply template?" checkbox at the top of the form
+    if ($request->boolean("apply_template") && ($template = UserTemplate::find($request->template))) {
+      $template->applyTo(User::find($id));
     }
 
     return redirect("admin/users/all");
