@@ -227,7 +227,6 @@ function text($key){
 <a name="Application"><h2 class="ch2">{{__('messages.Application')}}</h2></a>
 
 @if(!config('linkstack.single_user_mode'))
-{{toggle('ALLOW_REGISTRATION')}}
 
 
 {{toggle2('REGISTER_AUTH')}}

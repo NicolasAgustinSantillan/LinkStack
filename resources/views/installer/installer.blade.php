@@ -224,12 +224,6 @@
 <div class="form-group col-lg-8">
 <div class="input-group">
 
-<label>{{__('messages.Enable registration:')}}</label>
-<select style="max-width:300px" class="form-control" name="register">
-<option value="Yes">{{__('messages.Yes')}}</option>
-<option value="No">{{__('messages.No')}}</option>
-</select>
-
 <label>{{__('messages.Enable email verification:')}}</label>
 <select style="max-width:300px" class="form-control" name="verify">
 <option value="Yes">{{__('messages.Yes')}}</option>

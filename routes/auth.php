@@ -29,24 +29,15 @@ if(config('advanced-config.forgot_password_url') != '') {
 }
 
 Route::post('/validate-handle', [RegisteredUserController::class, 'validateHandle']);
-    if(env('ALLOW_REGISTRATION') or $register !== '/register') {
-        Route::get($register, [RegisteredUserController::class, 'create'])
-            ->middleware('guest')
-            ->middleware('max.users')
-            ->name('register');
 
-        Route::post($register, [RegisteredUserController::class, 'store'])
-            ->middleware('guest')
-            ->middleware('max.users');
-    } else {
-        Route::get($register, function () {
-            abort(404);
-        })->name('register');
+// Antares: public sign-up is disabled, accounts are created by an admin (Admin → Users)
+Route::get($register, function () {
+    abort(404);
+})->name('register');
 
-        Route::post($register, function () {
-            abort(404);
-        });
-    }
+Route::post($register, function () {
+    abort(404);
+});
 
 Route::get($login, [AuthenticatedSessionController::class, 'create'])
                 ->middleware('guest')
