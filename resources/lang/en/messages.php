@@ -1154,4 +1154,27 @@ return [
         'profile_qr_enlarge' => 'Enlarge QR code',
     ],
 
+    'templates' => [
+        'title' => 'New user templates',
+        'intro' => 'Links added automatically when a user is created. Choose which template to apply when adding a user; each user can edit their links afterwards.',
+        'empty' => 'There are no templates yet.',
+        'new' => 'New template',
+        'items' => 'Items',
+        'items_hint' => 'They are added to the user page in this order.',
+        'add_item' => 'Add item',
+        'default' => 'Default',
+        'is_default' => 'Preselect it when creating users',
+        'type' => 'Type',
+        'type_link' => 'Link',
+        'type_predefined' => 'Brand button',
+        'type_heading' => 'Section heading',
+        'button' => 'Button',
+        'site_icon' => 'Use the website icon',
+        'saved' => 'Template saved',
+        'confirm_delete' => 'Delete this template? Existing users are not changed.',
+        'apply' => 'Template:',
+        'none' => 'No template',
+        'manage' => 'Edit templates',
+    ],
+
 ];

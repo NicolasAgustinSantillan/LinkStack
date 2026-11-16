@@ -28,6 +28,7 @@ use App\Models\Button;
 use App\Models\Link;
 use App\Models\Page;
 use App\Models\UserData;
+use App\Models\UserTemplate;
 
 class AdminController extends Controller
 {
@@ -239,6 +240,11 @@ class AdminController extends Controller
       "role" => "user",
       "block" => "no",
     ]);
+
+    // Links from the template chosen in Admin → Users
+    if ($template = UserTemplate::find(request("template"))) {
+      $template->applyTo($user);
+    }
 
     return redirect("admin/edit-user/" . $user->id);
   }

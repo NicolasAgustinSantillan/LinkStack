@@ -1080,4 +1080,27 @@ return array (
         'profile_qr_enlarge' => 'Ampliar código QR',
     ],
 
+    'templates' => [
+        'title' => 'Plantillas de usuarios',
+        'intro' => 'Links que se cargan automáticamente al crear un usuario. Al agregar un usuario elegís qué plantilla aplicarle; después cada usuario puede editar sus links.',
+        'empty' => 'Todavía no hay plantillas.',
+        'new' => 'Nueva plantilla',
+        'items' => 'Elementos',
+        'items_hint' => 'Se agregan en este orden a la página del usuario.',
+        'add_item' => 'Agregar elemento',
+        'default' => 'Por defecto',
+        'is_default' => 'Seleccionarla por defecto al crear usuarios',
+        'type' => 'Tipo',
+        'type_link' => 'Link',
+        'type_predefined' => 'Botón de marca',
+        'type_heading' => 'Título de sección',
+        'button' => 'Botón',
+        'site_icon' => 'Usar el ícono del sitio',
+        'saved' => 'Plantilla guardada',
+        'confirm_delete' => '¿Eliminar esta plantilla? Los usuarios ya creados no cambian.',
+        'apply' => 'Plantilla:',
+        'none' => 'Sin plantilla',
+        'manage' => 'Editar plantillas',
+    ],
+
 );

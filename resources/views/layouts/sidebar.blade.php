@@ -177,6 +177,12 @@ $usrhandl = Auth::user()->littlelink_name;
                                     <span class="item-name">{{__('messages.Manage Users')}}</span>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::segment(2) == 'templates' ? 'active' : ''}}" href="{{ route('showTemplates') }}">
+                                  <i class="bi bi-layout-text-window-reverse"></i>
+                                    <span class="item-name">{{__('messages.templates.title')}}</span>
+                                </a>
+                            </li>
 							<li class="nav-item">
                                 <a class="nav-link {{ Request::segment(2) == 'pages' ? 'active' : ''}}" href="{{ url('admin/pages') }}">
                                   <i class="bi bi-collection-fill"></i>

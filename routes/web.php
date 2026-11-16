@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\SocialLoginController;
 use App\Http\Controllers\LinkTypeViewController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\InstallerController;
+use App\Http\Controllers\UserTemplateController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -192,6 +193,10 @@ Route::group([
     Route::post('/admin/edit-user/{id}', [AdminController::class, 'editUser'])->name('editUser');
     Route::get('/admin/new-user', [AdminController::class, 'createNewUser'])->name('createNewUser')->middleware('max.users');
     Route::get('/admin/delete-user/{id}', [AdminController::class, 'deleteUser'])->name('deleteUser');
+    Route::get('/admin/templates', [UserTemplateController::class, 'index'])->name('showTemplates');
+    Route::get('/admin/templates/{id}', [UserTemplateController::class, 'edit'])->name('editTemplate');
+    Route::post('/admin/templates/{id}', [UserTemplateController::class, 'save'])->name('saveTemplate');
+    Route::post('/admin/templates/{id}/delete', [UserTemplateController::class, 'delete'])->name('deleteTemplate');
     Route::post('/admin/delete-table-user/{id}', [AdminController::class, 'deleteTableUser'])->name('deleteTableUser');
     Route::get('/admin/pages', [AdminController::class, 'showSitePage'])->name('showSitePage');
     Route::post('/admin/pages', [AdminController::class, 'editSitePage'])->name('editSitePage');

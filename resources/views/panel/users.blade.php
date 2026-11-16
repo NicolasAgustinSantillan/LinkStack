@@ -36,7 +36,17 @@
 
                         <livewire:user-table />
                         
-                        <a href="{{ url('') }}/admin/new-user">+ {{__('messages.Add new user')}}</a>
+                        <form action="{{ route('createNewUser') }}" method="get" class="d-flex flex-wrap gap-2 align-items-center mt-3">
+                          <label for="new-user-template" class="mb-0">{{__('messages.templates.apply')}}</label>
+                          <select name="template" id="new-user-template" class="form-select form-select-sm w-auto">
+                            <option value="">{{__('messages.templates.none')}}</option>
+                            @foreach(\App\Models\UserTemplate::orderBy('name')->get() as $template)
+                              <option value="{{ $template->id }}" @selected($template->is_default)>{{ $template->name }}</option>
+                            @endforeach
+                          </select>
+                          <button type="submit" class="btn btn-primary btn-sm">+ {{__('messages.Add new user')}}</button>
+                          <a href="{{ route('showTemplates') }}" class="small">{{__('messages.templates.manage')}}</a>
+                        </form>
                         
                         <script type="text/javascript">
                           // Function to confirm and delete users
