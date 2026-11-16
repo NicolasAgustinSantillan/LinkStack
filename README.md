@@ -86,7 +86,7 @@ Recomendada: **`imagick`** — sin ella el QR se genera en SVG en lugar de PNG.
 
 ## 🐳 Levantarlo con Docker (recomendado)
 
-Todo lo relacionado con Docker vive en [`./docker`](docker):
+Todo lo relacionado con Docker vive en [`./docker`](docker) y los scripts en [`./scripts`](scripts):
 
 ```
 docker/
@@ -95,7 +95,9 @@ docker/
 ├── docker-compose.server.yml   # servidor con Traefik
 ├── entrypoint.sh               # sincroniza el código y conserva los datos
 ├── apache-linkstack.conf
-├── php.ini
+└── php.ini
+
+scripts/
 └── release.ps1                 # build + push al registry privado
 ```
 
@@ -167,7 +169,7 @@ Abrí **http://localhost:8000** y seguí el instalador web.
 ## 🏷️ Publicar una versión
 
 ```powershell
-pwsh docker/release.ps1
+pwsh scripts/release.ps1
 ```
 
 El script:

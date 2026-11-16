@@ -77,11 +77,25 @@ if ($tooBig) {
     exit 1
 }
 
-# — Push
+# — Push con reintentos: el registry (detras de Cloudflare/Traefik) a veces corta
+#   una subida con "blob upload invalid"; al reintentar solo sube las capas faltantes
+function Push-Image([string]$ref) {
+    for ($try = 1; $try -le 3; $try++) {
+        docker push $ref
+        if ($LASTEXITCODE -eq 0) { return }
+        if ($try -lt 3) {
+            Write-Host "  Push fallido (intento $try/3), reintentando en 10 s..." -ForegroundColor Yellow
+            Start-Sleep -Seconds 10
+        }
+    }
+    Write-Host "  ERROR: push fallido tras 3 intentos." -ForegroundColor Red
+    Write-Host "  Si se repite, limitar subidas en paralelo: Docker Desktop > Settings > Docker Engine > `"max-concurrent-uploads`": 1" -ForegroundColor Red
+    exit 1
+}
+
 Write-Host ""
 Write-Host "[ 5/5 ] Subiendo al registry..."
-docker push "${IMAGE}:${VERSION}"
-if ($LASTEXITCODE -ne 0) { Write-Host "  ERROR: push fallido." -ForegroundColor Red; exit 1 }
+Push-Image "${IMAGE}:${VERSION}"
 
 # — Tag adicional como latest si la version no lo es
 # (docker-compose.server.yml usa :latest)
@@ -90,7 +104,7 @@ if ($VERSION -ne "latest") {
     $tagLatest = Read-Host "  Tambien taggear y pushear como 'latest'? [S/n]"
     if ($tagLatest -notmatch '^[nN]$') {
         docker tag "${IMAGE}:${VERSION}" "${IMAGE}:latest"
-        docker push "${IMAGE}:latest"
+        Push-Image "${IMAGE}:latest"
         Write-Host "  Pusheado tambien como :latest"
     }
 }

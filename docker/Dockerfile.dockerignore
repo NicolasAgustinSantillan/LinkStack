@@ -7,7 +7,7 @@ node_modules
 vendor
 release
 docker/docker-compose*.yml
-docker/release.ps1
+scripts
 storage/logs/*.log
 storage/framework/cache/data/*
 storage/framework/sessions/*

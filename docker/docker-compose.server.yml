@@ -1,5 +1,5 @@
 # Stack del servidor (QA) detrás de Traefik.
-# La imagen se publica con docker/release.ps1
+# La imagen se publica con scripts/release.ps1
 services:
   linkstack:
     image: registry.antaresautomation.com/antares-linkstack:latest
