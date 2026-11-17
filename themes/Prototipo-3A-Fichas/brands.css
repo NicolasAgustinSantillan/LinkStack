@@ -1,0 +1,79 @@
+/* Prototipo 3A — buttons
+   Product cards: grey card, green top border, black circle with a green icon
+   and the title in bold below. On hover the circle turns green. */
+
+.rounded-avatar { border-radius: 50%; }
+
+.button {
+  position: relative;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  min-height: 116px;
+  margin: 0 0 12px !important;
+  padding: 66px 14px 14px;
+  box-sizing: border-box;
+  font-family: 'Montserrat', 'Segoe UI', Roboto, sans-serif;
+  font-weight: 700;
+  font-size: .9em;
+  line-height: 1.25;
+  text-align: left;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--card);
+  cursor: pointer;
+  transition: background .3s, box-shadow .3s;
+}
+/* Green top border, drawn once the card is in */
+.button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 4px;
+  background: var(--brand);
+  transform-origin: left;
+  animation: fichas-draw .6s cubic-bezier(.2, .8, .2, 1) both;
+  animation-delay: calc(var(--delay, 0s) / 10 + .4s);
+}
+@keyframes fichas-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Icon circle */
+.button::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--ink);
+  animation: fichas-icon .7s cubic-bezier(.2, 1.2, .3, 1) both;
+  animation-delay: calc(var(--delay, 0s) / 10 + .25s);
+  transition: background .3s;
+}
+
+.button:hover, .button:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 14px 28px rgba(17, 17, 17, .1);
+}
+.button:hover::before, .button:focus-visible::before { background: var(--brand); }
+
+/* White brand icons → brand green inside the black circle; dark on hover */
+.icon {
+  position: absolute;
+  left: 25px;
+  top: 27px;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(72%) sepia(62%) saturate(800%) hue-rotate(41deg) brightness(98%);
+  animation: fichas-icon .7s cubic-bezier(.2, 1.2, .3, 1) both;
+  animation-delay: calc(var(--delay, 0s) / 10 + .25s);
+}
+.button:hover .icon, .button:focus-visible .icon { filter: brightness(0); }

@@ -1,0 +1,32 @@
+/* Prototipo 3B — animations
+   Everything enters from the left, like a slide build. */
+
+.button-entrance {
+  animation: slide-in .7s cubic-bezier(.2, .8, .2, 1) both;
+  animation-delay: calc(var(--delay) / 10);
+}
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.fadein {
+  animation: slide-in .8s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+/* Hover */
+.button-hover, .credit-hover, .social-hover {
+  display: inline-block;
+  transform: perspective(1px) translateZ(0);
+}
+.button-hover { transition: transform .3s cubic-bezier(.2, .8, .2, 1), background .3s, box-shadow .3s; }
+.button-hover:hover, .button-hover:focus, .button-hover:active { transform: translateX(6px); }
+.social-hover { transition: transform .25s; }
+.social-hover:hover, .social-hover:focus { transform: translateY(-3px); }
+.credit-hover:hover { transform: scale(1.04); }
+
+.icon-hover .hvr-icon { transition: transform .4s; }
+.icon-hover:hover .hvr-icon { transform: scale(1.12); }
+
+.footer-hover { display: inline-block; transition: transform .3s ease-out; }
+.footer-hover:hover { transform: translateY(-4px); }

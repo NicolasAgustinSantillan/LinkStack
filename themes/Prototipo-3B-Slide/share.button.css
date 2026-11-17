@@ -1,0 +1,47 @@
+/* Prototipo 3B Slide — share button */
+
+.sharediv {
+  position: relative;
+  top: 24px;
+  right: 24px;
+  padding-bottom: 40px;
+}
+
+.sharebutton,
+sharebutton {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--ink);
+  cursor: pointer;
+  transition: transform .3s, box-shadow .3s;
+}
+.sharebutton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(17, 17, 17, .15);
+}
+
+.share-icon,
+.sharebutton .sharebutton-img {
+  color: var(--brand) !important;
+  font-size: 17px;
+}
+.sharebutton-mb { display: none; }
+
+.toastdiv { display: flex; align-items: center; justify-content: center; }
+.toastbox {
+  position: fixed;
+  top: 105%;
+  z-index: 2;
+  width: 280px;
+  padding: 10px;
+  border-top: 4px solid var(--brand);
+  background: var(--card);
+  color: var(--ink);
+  text-align: center;
+  transition: transform .3s linear;
+}
+.toastbox.toast-tox--active { transform: translateY(-150px); }

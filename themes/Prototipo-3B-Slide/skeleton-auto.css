@@ -1,0 +1,228 @@
+/* Prototipo 3B — Slide
+   La tarjeta se arma como la diapositiva 3: todo alineado a la izquierda, el
+   avatar como el ícono de una ficha junto al nombre, títulos verdes con barra
+   lateral y fichas a lo ancho con borde superior verde.
+
+   Table of contents
+   - Fonts
+   - Variables
+   - Grid
+   - Background
+   - Header (avatar + name, like a product card heading)
+   - Typography
+   - Social icons
+   - Misc
+   - Reduced motion
+*/
+
+/* Fonts (bundled, relative to this file)
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@font-face { font-family: 'Montserrat'; font-weight: 400; font-display: swap;
+  src: url('extra/custom-assets/montserrat-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+2215; }
+@font-face { font-family: 'Montserrat'; font-weight: 400; font-display: swap;
+  src: url('extra/custom-assets/montserrat-latin-ext-400-normal.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Montserrat'; font-weight: 600; font-display: swap;
+  src: url('extra/custom-assets/montserrat-latin-600-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+2215; }
+@font-face { font-family: 'Montserrat'; font-weight: 600; font-display: swap;
+  src: url('extra/custom-assets/montserrat-latin-ext-600-normal.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Montserrat'; font-weight: 700; font-display: swap;
+  src: url('extra/custom-assets/montserrat-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+2215; }
+@font-face { font-family: 'Montserrat'; font-weight: 700; font-display: swap;
+  src: url('extra/custom-assets/montserrat-latin-ext-700-normal.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Montserrat'; font-weight: 800; font-display: swap;
+  src: url('extra/custom-assets/montserrat-latin-800-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+2215; }
+@font-face { font-family: 'Montserrat'; font-weight: 800; font-display: swap;
+  src: url('extra/custom-assets/montserrat-latin-ext-800-normal.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+/* Variables
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+:root {
+  --bg: #ffffff;
+  --card: #f2f2f2;
+  --ink: #111111;
+  --text: #444444;
+  --muted: #888888;
+  --brand: #7bd51d;
+  --brand-ink: #4f9a0a;   /* darker brand green, readable on white */
+
+  /* Used by share.button.css */
+  --button-background-color: var(--card);
+  --button-text-color: var(--ink);
+  --accentColor: var(--brand);
+}
+
+::selection { background: var(--brand); color: var(--ink); }
+
+/* Grid
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+html { font-size: 100%; }
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: left;
+  box-sizing: border-box;
+}
+.column { width: 100%; box-sizing: border-box; }
+.column::after { content: ""; display: block; clear: both; }
+
+/* The bio and the QR are wrapped in <center>: keep the bio on the left */
+.column > center:has(.description-parent) { text-align: left; clear: both; }
+
+/* Background
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Montserrat', 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.background-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.parallax-background > div { position: absolute; display: none; }
+
+/* Slide frame: green title bar on the left edge that grows and breathes */
+#object1 {
+  display: block;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(var(--brand), var(--brand)) top / 100% 0 no-repeat;
+  animation: slide-edge 1.4s cubic-bezier(.2, .8, .2, 1) .2s both;
+}
+@keyframes slide-edge { to { background-size: 100% 100%; } }
+
+/* Light running down the edge */
+#object2 {
+  display: block;
+  left: 0;
+  top: -120px;
+  width: 6px;
+  height: 120px;
+  background: linear-gradient(transparent, rgba(255, 255, 255, .9), transparent);
+  animation: slide-run 5s ease-in-out 1.6s infinite;
+}
+@keyframes slide-run {
+  from      { transform: translateY(0); }
+  70%, to   { transform: translateY(calc(100vh + 120px)); }
+}
+
+/* Slide number in the corner, as in the deck */
+#object3 {
+  display: block;
+  right: 20px;
+  bottom: 14px;
+  font: 400 14px/1 'Montserrat', sans-serif;
+  color: #bbbbbb;
+  letter-spacing: .05em;
+}
+#object3::after { content: "03"; }
+
+/* Header
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+#avatar {
+  float: left;
+  width: 84px !important;
+  height: 84px !important;
+  min-width: 0 !important;
+  margin: 0 18px 14px 0;
+  padding: 6px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: var(--ink);
+  animation: slide-icon .8s cubic-bezier(.2, 1.2, .3, 1) both;
+}
+@keyframes slide-icon {
+  from { opacity: 0; transform: scale(.4) rotate(-90deg); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Name next to the avatar, vertically centred */
+h1, h1.fadein {
+  display: flex;
+  align-items: center;
+  min-height: 84px;
+  margin: 0 0 14px;
+  font-weight: 800;
+  font-size: 1.9em;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  animation: slide-in .8s cubic-bezier(.2, .8, .2, 1) .15s both;
+}
+
+p {
+  margin: 0 0 22px;
+  color: var(--text);
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+/* Typography
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Heading block: slide title (green side bar + uppercase green) */
+h2 {
+  position: relative;
+  margin: 30px 0 14px;
+  padding: 4px 0 4px 18px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 1.35em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--brand);
+  transform-origin: top;
+  animation: slide-grow-y .6s cubic-bezier(.2, .8, .2, 1) .3s both;
+}
+@keyframes slide-grow-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+a { color: var(--brand-ink); text-decoration: none; }
+a:hover { color: var(--ink); }
+
+/* Social icons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.social-icon-div { padding-bottom: 18px; text-align: left; }
+.social-icon {
+  font-size: 24px;
+  padding: 8px 14px 8px 0;
+  color: var(--ink) !important;
+  transition: color .25s;
+}
+.social-icon:hover { color: var(--brand-ink) !important; }
+
+/* Misc
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.sharediv { z-index: 2; }
+.footer { color: var(--muted); text-align: center; }
+.spacing { padding: 0 10px; }
+.badge { padding-bottom: 6px; }
+
+/* Reduced motion
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  #object1 { background-size: 100% 100%; }
+}

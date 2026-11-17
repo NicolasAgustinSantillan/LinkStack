@@ -1,0 +1,83 @@
+/* Prototipo 3C — buttons
+   Each link is a "DEMO MIROBOT" band: green circle with the icon and the title
+   as a green uppercase label. On hover a green bar sweeps across the bottom
+   and the circle sends out a ring. */
+
+.rounded-avatar { border-radius: 50%; }
+
+.button {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  width: 100%;
+  min-height: 70px;
+  margin: 0 0 10px !important;
+  padding: 12px 10px 12px 70px;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: 'Montserrat', 'Segoe UI', Roboto, sans-serif;
+  font-weight: 700;
+  font-size: .84em;
+  line-height: 1.25;
+  letter-spacing: 0;
+  text-align: left;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  color: var(--brand);
+  background: var(--band);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: background .3s, color .3s, border-color .3s;
+}
+/* Green circle */
+.button::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  margin-top: -21px;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 0 0 rgba(123, 213, 29, .5);
+}
+/* Bottom sweep */
+.button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .45s cubic-bezier(.2, .8, .2, 1);
+}
+
+.button:hover, .button:focus-visible {
+  color: var(--text);
+  background: #1f1f1f;
+  border-color: #333333;
+}
+.button:hover::after, .button:focus-visible::after { transform: scaleX(1); }
+.button:hover::before, .button:focus-visible::before { animation: demo-ping 1.2s ease-out infinite; }
+@keyframes demo-ping {
+  from { box-shadow: 0 0 0 0 rgba(123, 213, 29, .5); }
+  to   { box-shadow: 0 0 0 14px rgba(123, 213, 29, 0); }
+}
+
+/* White brand icons → dark, inside the green circle */
+.icon {
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0;
+  object-fit: contain;
+  filter: brightness(0);
+}

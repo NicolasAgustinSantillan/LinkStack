@@ -1,0 +1,35 @@
+/* Prototipo 3C — animations
+   Bands are revealed left to right while the circle pops in. */
+
+.button-entrance {
+  animation: demo-wipe .8s cubic-bezier(.2, .8, .2, 1) both;
+  animation-delay: calc(var(--delay) / 10);
+}
+@keyframes demo-wipe {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  30%  { opacity: 1; }
+  to   { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+.fadein {
+  animation: demo-rise .8s cubic-bezier(.2, .8, .2, 1) both;
+}
+@keyframes demo-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Hover */
+.button-hover, .credit-hover, .social-hover {
+  display: inline-block;
+  transform: perspective(1px) translateZ(0);
+}
+.social-hover { transition: transform .25s; }
+.social-hover:hover, .social-hover:focus { transform: translateY(-3px); }
+.credit-hover:hover { transform: scale(1.04); }
+
+.icon-hover .hvr-icon { transition: transform .4s; }
+.icon-hover:hover .hvr-icon { transform: scale(1.12); }
+
+.footer-hover { display: inline-block; transition: transform .3s ease-out; }
+.footer-hover:hover { transform: translateY(-4px); }

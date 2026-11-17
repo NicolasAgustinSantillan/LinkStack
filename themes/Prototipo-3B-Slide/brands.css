@@ -1,0 +1,75 @@
+/* Prototipo 3B — buttons
+   Full-width product cards: grey, green top border, black circle with a green
+   icon and the bold title next to it. On hover the border thickens and the card
+   moves right, as if it were selected. */
+
+.rounded-avatar { border-radius: 50%; }
+
+.button {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  width: 100%;
+  min-height: 68px;
+  margin: 0 0 14px !important;
+  padding: 14px 16px 12px 74px;
+  box-sizing: border-box;
+  font-family: 'Montserrat', 'Segoe UI', Roboto, sans-serif;
+  font-weight: 700;
+  font-size: .93em;
+  line-height: 1.25;
+  text-align: left;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--card);
+  cursor: pointer;
+  transition: background .3s, box-shadow .3s;
+}
+/* Green top border */
+.button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 4px;
+  background: var(--brand);
+  transform-origin: left;
+  animation: slide-draw .6s cubic-bezier(.2, .8, .2, 1) both;
+  animation-delay: calc(var(--delay, 0s) / 10 + .35s);
+  transition: height .3s;
+}
+@keyframes slide-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Icon circle */
+.button::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  margin-top: -19px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.button:hover, .button:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 12px 26px rgba(17, 17, 17, .1);
+}
+.button:hover::after, .button:focus-visible::after { height: 7px; }
+
+/* White brand icons → brand green inside the black circle */
+.icon {
+  position: absolute;
+  left: 27px;
+  top: 50%;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  margin: -8px 0 0;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(72%) sepia(62%) saturate(800%) hue-rotate(41deg) brightness(98%);
+}
