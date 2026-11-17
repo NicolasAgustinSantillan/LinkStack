@@ -11,10 +11,11 @@ use Illuminate\Database\Eloquent\Model;
  *   ['type' => 'link',       'title' => ..., 'url' => ..., 'site_icon' => bool]
  *   ['type' => 'predefined', 'button' => <buttons.name>, 'title' => ..., 'url' => ...]
  *   ['type' => 'heading',    'title' => ...]
+ *   ['type' => 'email',      'title' => ...]   mailto: with the email of each user
  */
 class UserTemplate extends Model
 {
-    public const TYPES = ['link', 'predefined', 'heading'];
+    public const TYPES = ['link', 'predefined', 'heading', 'email'];
 
     // Buttons that are blocks or internal, not brand buttons
     public const HIDDEN_BUTTONS = ['custom', 'custom_website', 'heading', 'space', 'text', 'icon', 'vcard', 'phone', 'littlelink-custom', 'default email', 'default email_alt'];
@@ -52,6 +53,12 @@ class UserTemplate extends Model
                 case 'heading':
                     $data['button_id'] = 42;
                     $data['link'] = '';
+                    break;
+                case 'email':
+                    // Same as the "E-Mail" block: button "default email"
+                    $data['button_id'] = 6;
+                    $data['link'] = 'mailto:' . $user->email;
+                    $data['title'] = $data['title'] !== '' ? $data['title'] : $user->email;
                     break;
                 default:
                     $data['type'] = 'link';

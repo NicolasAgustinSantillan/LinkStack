@@ -1168,6 +1168,8 @@ return [
         'type_link' => 'Link',
         'type_predefined' => 'Brand button',
         'type_heading' => 'Section heading',
+        'type_email' => 'User email',
+        'email_hint' => 'Email button with each user\'s address. Leave the title empty to show the address.',
         'button' => 'Button',
         'site_icon' => 'Use the website icon',
         'saved' => 'Template saved',

@@ -1,0 +1,34 @@
+/* Antares Keynote — animations
+   Bands come up one after the other, like bullets in a presentation. */
+
+.button-entrance {
+  animation: keynote-band .75s cubic-bezier(.2, .8, .2, 1) both;
+  animation-delay: calc(var(--delay) / 10 + .2s);
+}
+@keyframes keynote-band {
+  from { opacity: 0; transform: translateY(22px) scale(.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+.fadein {
+  animation: keynote-rise .9s cubic-bezier(.2, .8, .2, 1) both;
+}
+@keyframes keynote-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Hover */
+.button-hover, .credit-hover, .social-hover {
+  display: inline-block;
+  transform: perspective(1px) translateZ(0);
+}
+.social-hover { transition: transform .25s; }
+.social-hover:hover, .social-hover:focus { transform: translateY(-3px); }
+.credit-hover:hover { transform: scale(1.04); }
+
+.icon-hover .hvr-icon { transition: transform .4s; }
+.icon-hover:hover .hvr-icon { transform: scale(1.12); }
+
+.footer-hover { display: inline-block; transition: transform .3s ease-out; }
+.footer-hover:hover { transform: translateY(-4px); }

@@ -1,0 +1,60 @@
+/* Antares Blueprint — buttons
+   Technical-drawing cards with green corner brackets; on hover they lift
+   and the brackets extend. */
+
+.rounded-avatar { border-radius: 50%; }
+
+.button {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  margin: 0 0 16px !important;
+  padding: 10px 48px;
+  box-sizing: border-box;
+  font-family: 'Rajdhani', 'Arial Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 1.12em;
+  line-height: 1.2;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  background:
+    linear-gradient(var(--brand), var(--brand)) left 5px top 5px / 12px 2.5px no-repeat,
+    linear-gradient(var(--brand), var(--brand)) left 5px top 5px / 2.5px 12px no-repeat,
+    linear-gradient(var(--brand), var(--brand)) right 5px bottom 5px / 12px 2.5px no-repeat,
+    linear-gradient(var(--brand), var(--brand)) right 5px bottom 5px / 2.5px 12px no-repeat,
+    #ffffff;
+  box-shadow: 4px 4px 0 rgba(15, 43, 76, .12);
+  cursor: pointer;
+  transition: background-size .35s ease, box-shadow .3s, border-color .3s, color .3s, transform .3s;
+}
+
+.button:hover,
+.button:focus-visible {
+  color: var(--brand-ink);
+  border-color: var(--brand-ink);
+  background-size: 28px 2.5px, 2.5px 22px, 28px 2.5px, 2.5px 22px, auto;
+  box-shadow: 7px 7px 0 rgba(122, 210, 28, .35);
+}
+
+/* White brand icons → ink */
+.icon {
+  position: static;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(13%) sepia(38%) saturate(2700%) hue-rotate(196deg) brightness(92%);
+  transition: filter .3s;
+}
+.button:hover .icon {
+  filter: brightness(0) saturate(100%) invert(38%) sepia(85%) saturate(1400%) hue-rotate(60deg) brightness(92%);
+}

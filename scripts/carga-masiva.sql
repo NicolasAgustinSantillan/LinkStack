@@ -43,10 +43,11 @@ SELECT u.id,
        CASE jt.item_type
          WHEN 'heading'    THEN 42
          WHEN 'predefined' THEN b.id
+         WHEN 'email'      THEN 6                                   -- botón "default email"
          ELSE CASE WHEN jt.site_icon = 'true' OR jt.site_icon = '1' THEN 2 ELSE 1 END
        END,
-       COALESCE(jt.url, ''),
-       COALESCE(NULLIF(jt.title, ''), b.alt, ''),
+       CASE WHEN jt.item_type = 'email' THEN CONCAT('mailto:', u.email) ELSE COALESCE(jt.url, '') END,
+       COALESCE(NULLIF(jt.title, ''), CASE WHEN jt.item_type = 'email' THEN u.email END, b.alt, ''),
        jt.item_type,
        CASE jt.item_type
          WHEN 'heading' THEN '{"custom_html":true,"ignore_container":false,"include_libraries":[]}'

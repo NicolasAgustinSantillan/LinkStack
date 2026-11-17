@@ -1,0 +1,249 @@
+/* Antares Blueprint — ingeniería y robótica
+   Plano técnico claro: cuadrícula, engranajes en movimiento y un láser de medición.
+
+   Table of contents
+   - Fonts
+   - Variables
+   - Grid
+   - Background (paper grid + gears + laser)
+   - Avatar & typography
+   - Social icons
+   - Misc
+   - Reduced motion
+*/
+
+/* Fonts (bundled, relative to this file)
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@font-face { font-family: 'Rajdhani'; font-weight: 500; font-display: swap;
+  src: url('extra/custom-assets/rajdhani-latin-500-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+2215; }
+@font-face { font-family: 'Rajdhani'; font-weight: 500; font-display: swap;
+  src: url('extra/custom-assets/rajdhani-latin-ext-500-normal.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Rajdhani'; font-weight: 700; font-display: swap;
+  src: url('extra/custom-assets/rajdhani-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+2215; }
+@font-face { font-family: 'Rajdhani'; font-weight: 700; font-display: swap;
+  src: url('extra/custom-assets/rajdhani-latin-ext-700-normal.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Barlow'; font-weight: 400; font-display: swap;
+  src: url('extra/custom-assets/barlow-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+2215; }
+@font-face { font-family: 'Barlow'; font-weight: 400; font-display: swap;
+  src: url('extra/custom-assets/barlow-latin-ext-400-normal.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+/* Variables
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+:root {
+  --paper: #f2f6fa;
+  --grid-fine: #e0e8f1;
+  --grid-major: #c9d7e6;
+  --ink: #0f2b4c;
+  --ink-soft: #4a6584;
+  --brand: #7ad21c;
+  --brand-ink: #3f8a0c;   /* darker brand green, readable on white */
+
+  /* Used by share.button.css */
+  --button-background-color: #ffffff;
+  --button-text-color: var(--ink);
+  --accentColor: var(--ink);
+}
+
+::selection { background: var(--brand); color: #0b1d05; }
+
+/* Grid
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+html { font-size: 100%; }
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 16px;
+  text-align: center;
+  box-sizing: border-box;
+}
+.column { width: 100%; box-sizing: border-box; }
+
+/* Background
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Barlow', 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(70% 55% at 50% 35%, rgba(255, 255, 255, .85), transparent 75%),
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid-fine) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-fine) 1px, transparent 1px);
+  background-size: auto, 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.background-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.parallax-background > div { position: absolute; display: none; }
+
+/* Gears (16 and 10 teeth), drawn with a dashed stroke */
+#object1, #object2, #object3, #object4 {
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: .55;
+  animation: blueprint-spin linear infinite;
+}
+#object1, #object4 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23b4c8de'%3E%3Ccircle cx='60' cy='60' r='50' stroke-width='12' stroke-dasharray='9.82 9.82'/%3E%3Ccircle cx='60' cy='60' r='43' stroke-width='3'/%3E%3Ccircle cx='60' cy='60' r='12' stroke-width='3'/%3E%3Cpath d='M60 17V48M60 72V103M17 60H48M72 60H103' stroke-width='3'/%3E%3Ccircle cx='60' cy='60' r='30' stroke-width='1.5' stroke-dasharray='3 4'/%3E%3C/g%3E%3C/svg%3E");
+}
+#object2, #object3 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23a9d27e'%3E%3Ccircle cx='60' cy='60' r='48' stroke-width='14' stroke-dasharray='15.08 15.08'/%3E%3Ccircle cx='60' cy='60' r='40' stroke-width='3'/%3E%3Ccircle cx='60' cy='60' r='14' stroke-width='3'/%3E%3Cpath d='M60 46V20M72 67L94 80M48 67L26 80' stroke-width='3'/%3E%3C/g%3E%3C/svg%3E");
+}
+#object1 { width: 300px; height: 300px; top: -110px; right: -110px; animation-duration: 40s; }
+#object2 { width: 190px; height: 190px; top: 150px; right: -60px; animation-duration: 25s; animation-direction: reverse; }
+#object3 { width: 170px; height: 170px; bottom: 120px; left: -70px; animation-duration: 22s; }
+#object4 { width: 260px; height: 260px; bottom: -100px; left: 60px; animation-duration: 36s; animation-direction: reverse; }
+
+@keyframes blueprint-spin { to { transform: rotate(360deg); } }
+
+/* Measuring crosshair */
+#object5 {
+  display: block;
+  width: 140px;
+  height: 140px;
+  top: 38%;
+  left: -40px;
+  border: 1.5px dashed #b4c8de;
+  border-radius: 50%;
+  background:
+    linear-gradient(#b4c8de, #b4c8de) center / 1.5px 100% no-repeat,
+    linear-gradient(#b4c8de, #b4c8de) center / 100% 1.5px no-repeat;
+  animation: blueprint-spin 30s linear infinite reverse;
+}
+
+/* Laser scanning line, like a robot vision sensor */
+#object6 {
+  display: block;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(122, 210, 28, .75) 20%, rgba(122, 210, 28, .75) 80%, transparent);
+  box-shadow: 0 0 12px rgba(122, 210, 28, .55);
+  animation: blueprint-scan 9s ease-in-out infinite;
+}
+@keyframes blueprint-scan {
+  0%   { transform: translateY(-10px); opacity: 0; }
+  10%  { opacity: 1; }
+  50%  { transform: translateY(100vh); opacity: 1; }
+  60%  { opacity: 0; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* Avatar & typography
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+#avatar {
+  width: 124px !important;
+  height: 124px !important;
+  min-width: 0 !important;
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: #ffffff;
+  outline: 1.5px dashed var(--ink-soft);
+  outline-offset: 8px;
+  box-shadow: 0 10px 24px rgba(15, 43, 76, .15);
+  animation: blueprint-draw 1s ease-out both, blueprint-measure 4s ease-in-out 1s infinite;
+}
+@keyframes blueprint-measure {
+  0%, 100% { outline-offset: 8px;  outline-color: var(--ink-soft); }
+  50%      { outline-offset: 13px; outline-color: var(--brand-ink); }
+}
+
+h1, h1.fadein {
+  margin: 26px 0 4px;
+  font-family: 'Rajdhani', 'Arial Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 2.4em;
+  line-height: 1.1;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  animation: blueprint-draw 1s ease-out both;
+}
+/* Dimension line under the name */
+h1::after {
+  content: "";
+  display: block;
+  width: 140px;
+  height: 10px;
+  margin: 12px auto 0;
+  background:
+    linear-gradient(var(--brand-ink), var(--brand-ink)) center / 100% 2px no-repeat,
+    linear-gradient(var(--ink-soft), var(--ink-soft)) left center / 2px 100% no-repeat,
+    linear-gradient(var(--ink-soft), var(--ink-soft)) right center / 2px 100% no-repeat;
+  animation: blueprint-dimension 1.2s cubic-bezier(.2, .8, .2, 1) .4s both;
+}
+@keyframes blueprint-dimension { from { width: 0; } to { width: 140px; } }
+
+p {
+  margin: 0 0 24px;
+  color: var(--ink-soft);
+  font-size: 1.05em;
+  line-height: 1.6;
+}
+
+/* Heading block: technical label */
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0 14px;
+  font-family: 'Rajdhani', 'Arial Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+h2::before, h2::after {
+  content: "";
+  flex: 1;
+  height: 0;
+  border-top: 1.5px dashed var(--grid-major);
+}
+
+a { color: var(--ink); text-decoration: none; }
+a:hover { color: var(--brand-ink); }
+
+/* Social icons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.social-icon-div { padding-bottom: 22px; }
+.social-icon {
+  font-size: 26px;
+  padding: 10px;
+  color: var(--ink) !important;
+  transition: color .25s;
+}
+.social-icon:hover { color: var(--brand-ink) !important; }
+
+/* Misc
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.sharediv { z-index: 2; }
+.footer { color: var(--ink-soft); }
+.spacing { padding: 0 10px; }
+.badge { padding-bottom: 6px; }
+
+/* Reduced motion
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,73 @@
+/* Antares Mosaic — buttons
+   Dark panels with the green bar of the slide titles and the icon inside a
+   green circle; on hover the bar floods the button. */
+
+.rounded-avatar { border-radius: 50%; }
+
+.button {
+  position: relative;
+  z-index: 0;
+  display: flex !important;
+  align-items: center;
+  width: 100%;
+  min-height: 60px;
+  margin: 0 0 14px !important;
+  padding: 10px 16px 10px 72px;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: 'Montserrat', 'Segoe UI', Roboto, sans-serif;
+  font-weight: 600;
+  font-size: .95em;
+  line-height: 1.25;
+  text-align: left;
+  text-decoration: none;
+  color: var(--text);
+  background: rgba(26, 26, 26, .92);
+  border-left: 5px solid var(--brand);
+  cursor: pointer;
+  transition: color .35s ease;
+}
+/* Fill that grows from the green bar */
+.button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .45s cubic-bezier(.2, .8, .2, 1);
+}
+/* Icon circle */
+.button::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  border-radius: 50%;
+  background: var(--brand);
+  transition: background .35s ease;
+}
+
+.button:hover, .button:focus-visible { color: var(--bg); }
+.button:hover::after, .button:focus-visible::after { transform: scaleX(1); }
+.button:hover::before, .button:focus-visible::before { background: var(--bg); }
+
+/* White brand icons → dark, inside the circle */
+.icon {
+  position: absolute;
+  left: 26px;
+  top: 50%;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0;
+  object-fit: contain;
+  filter: brightness(0);
+  transition: filter .35s ease;
+}
+/* On hover the circle turns dark, so the icon goes back to its original white */
+.button:hover .icon, .button:focus-visible .icon { filter: none; }

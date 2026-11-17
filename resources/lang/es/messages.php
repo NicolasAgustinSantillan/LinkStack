@@ -1094,6 +1094,8 @@ return array (
         'type_link' => 'Link',
         'type_predefined' => 'Botón de marca',
         'type_heading' => 'Título de sección',
+        'type_email' => 'Correo del usuario',
+        'email_hint' => 'Botón de email con el correo de cada usuario. Si dejás el título vacío, muestra el correo.',
         'button' => 'Botón',
         'site_icon' => 'Usar el ícono del sitio',
         'saved' => 'Plantilla guardada',

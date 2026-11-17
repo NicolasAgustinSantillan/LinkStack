@@ -1,0 +1,50 @@
+/* Antares Blueprint — share button */
+
+.sharediv {
+  position: relative;
+  top: 24px;
+  right: 24px;
+  padding-bottom: 40px;
+}
+
+.sharebutton,
+sharebutton {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  background: #ffffff;
+  box-shadow: 3px 3px 0 rgba(15, 43, 76, .12);
+  cursor: pointer;
+  transition: border-color .3s, box-shadow .3s, transform .3s;
+}
+.sharebutton:hover {
+  border-color: var(--brand-ink);
+  box-shadow: 5px 5px 0 rgba(122, 210, 28, .35);
+  transform: translate(-2px, -2px);
+}
+
+.share-icon,
+.sharebutton .sharebutton-img {
+  color: var(--ink) !important;
+  font-size: 17px;
+}
+.sharebutton-mb { display: none; }
+
+.toastdiv { display: flex; align-items: center; justify-content: center; }
+.toastbox {
+  position: fixed;
+  top: 105%;
+  z-index: 2;
+  width: 280px;
+  padding: 10px;
+  border-radius: 3px;
+  background: var(--ink);
+  color: #ffffff;
+  text-align: center;
+  transition: transform .3s linear;
+}
+.toastbox.toast-tox--active { transform: translateY(-150px); }

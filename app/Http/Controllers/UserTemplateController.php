@@ -38,8 +38,8 @@ class UserTemplateController extends Controller
             'name' => 'required|string|max:255',
             'items' => 'array',
             'items.*.type' => 'required|in:' . implode(',', UserTemplate::TYPES),
-            'items.*.title' => 'nullable|string|max:255|required_unless:items.*.type,predefined',
-            'items.*.url' => 'nullable|string|max:2000|required_unless:items.*.type,heading',
+            'items.*.title' => 'nullable|string|max:255|required_unless:items.*.type,predefined,email',
+            'items.*.url' => 'nullable|string|max:2000|required_unless:items.*.type,heading,email',
             'items.*.button' => 'nullable|string|required_if:items.*.type,predefined',
         ]);
 

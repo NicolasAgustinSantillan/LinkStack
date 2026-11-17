@@ -1,0 +1,257 @@
+/* Antares Forge — metalurgia
+   Acero cepillado, chispas de fundición y brillo de metal al rojo.
+
+   Table of contents
+   - Fonts
+   - Variables
+   - Grid
+   - Background (glow + sparks)
+   - Avatar & typography
+   - Social icons
+   - Misc
+   - Reduced motion
+*/
+
+/* Fonts (bundled, relative to this file)
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@font-face { font-family: 'Oswald'; font-weight: 500; font-display: swap;
+  src: url('extra/custom-assets/oswald-latin-500-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+2215; }
+@font-face { font-family: 'Oswald'; font-weight: 500; font-display: swap;
+  src: url('extra/custom-assets/oswald-latin-ext-500-normal.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Oswald'; font-weight: 700; font-display: swap;
+  src: url('extra/custom-assets/oswald-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+2215; }
+@font-face { font-family: 'Oswald'; font-weight: 700; font-display: swap;
+  src: url('extra/custom-assets/oswald-latin-ext-700-normal.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Barlow'; font-weight: 400; font-display: swap;
+  src: url('extra/custom-assets/barlow-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+2215; }
+@font-face { font-family: 'Barlow'; font-weight: 400; font-display: swap;
+  src: url('extra/custom-assets/barlow-latin-ext-400-normal.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Barlow'; font-weight: 600; font-display: swap;
+  src: url('extra/custom-assets/barlow-latin-600-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+2215; }
+@font-face { font-family: 'Barlow'; font-weight: 600; font-display: swap;
+  src: url('extra/custom-assets/barlow-latin-ext-600-normal.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+/* Variables
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+:root {
+  --bg: #0e0f11;
+  --steel-hi: #31353b;
+  --steel-lo: #1a1c1f;
+  --edge: #3a3f46;
+  --rivet: #767d86;
+  --text: #ece8e2;
+  --muted: #a39d94;
+  --molten: #ff7a1a;
+  --molten-hot: #ffc066;
+  --brand: #7ad21c;
+
+  /* Used by share.button.css */
+  --button-background-color: var(--steel-lo);
+  --button-text-color: var(--text);
+  --accentColor: var(--edge);
+}
+
+@property --forge-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+::selection { background: var(--molten); color: #1a0d03; }
+
+/* Grid
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+html { font-size: 100%; }
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 16px;
+  text-align: center;
+  box-sizing: border-box;
+}
+.column { width: 100%; box-sizing: border-box; }
+
+/* Background
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Barlow', 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(120% 55% at 50% 118%, rgba(255, 106, 18, .30), transparent 62%),
+    radial-gradient(70% 40% at 50% -8%, rgba(122, 210, 28, .07), transparent 70%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .014) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 1px, transparent 1px 7px);
+  background-attachment: fixed;
+}
+
+/* Furnace glow breathing at the bottom */
+body::before {
+  content: "";
+  position: fixed;
+  left: -20%;
+  right: -20%;
+  bottom: -38vh;
+  height: 70vh;
+  background: radial-gradient(closest-side, rgba(255, 122, 26, .30), rgba(255, 70, 0, .08) 60%, transparent);
+  animation: forge-heat 7s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes forge-heat {
+  0%, 100% { opacity: .65; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.06); }
+}
+
+.background-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Sparks rising from the furnace (LinkStack renders #object1..#object12) */
+.parallax-background > div {
+  position: absolute;
+  bottom: -12px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--molten-hot);
+  box-shadow: 0 0 6px 2px rgba(255, 150, 50, .9), 0 0 16px 5px rgba(255, 90, 0, .35);
+  opacity: 0;
+  animation: forge-spark linear infinite;
+}
+#object1  { left: 6%;  --dx: 40px;  animation-duration: 7.5s;  animation-delay: 0s; }
+#object2  { left: 14%; --dx: -30px; animation-duration: 9s;    animation-delay: 2.1s; width: 2px; height: 2px; }
+#object3  { left: 23%; --dx: 60px;  animation-duration: 6.8s;  animation-delay: 4.3s; }
+#object4  { left: 31%; --dx: -50px; animation-duration: 10s;   animation-delay: 1.2s; width: 4px; height: 4px; }
+#object5  { left: 40%; --dx: 25px;  animation-duration: 8.2s;  animation-delay: 5.5s; width: 2px; height: 2px; }
+#object6  { left: 48%; --dx: -20px; animation-duration: 7s;    animation-delay: 3.3s; }
+#object7  { left: 57%; --dx: 45px;  animation-duration: 9.6s;  animation-delay: .6s; }
+#object8  { left: 65%; --dx: -60px; animation-duration: 6.5s;  animation-delay: 6.4s; width: 2px; height: 2px; }
+#object9  { left: 73%; --dx: 30px;  animation-duration: 8.8s;  animation-delay: 2.8s; width: 4px; height: 4px; }
+#object10 { left: 81%; --dx: -35px; animation-duration: 7.3s;  animation-delay: 4.9s; }
+#object11 { left: 88%; --dx: 20px;  animation-duration: 10.5s; animation-delay: 1.7s; width: 2px; height: 2px; }
+#object12 { left: 95%; --dx: -45px; animation-duration: 8s;    animation-delay: 7.2s; }
+
+@keyframes forge-spark {
+  0%   { opacity: 0; transform: translate(0, 0) scale(1); }
+  6%   { opacity: 1; }
+  60%  { opacity: .9; }
+  100% { opacity: 0; transform: translate(var(--dx), -95vh) scale(.25); }
+}
+
+/* Avatar & typography
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+#avatar {
+  width: 128px !important;
+  height: 128px !important;
+  min-width: 0 !important;
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  background:
+    linear-gradient(#17191c, #17191c) padding-box,
+    conic-gradient(from var(--forge-angle), #4b5058, #e2e5e9, #6c727a, #2a2d31, #b9bec4, #4b5058) border-box;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .6), 0 0 28px rgba(255, 122, 26, .22);
+  animation: forge-fade 1.2s ease-out both, forge-ring 9s linear infinite;
+}
+@keyframes forge-ring { to { --forge-angle: 360deg; } }
+
+h1, h1.fadein {
+  margin: 18px 0 6px;
+  font-family: 'Oswald', 'Arial Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 2.3em;
+  line-height: 1.15;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #dfe3e7;
+  background: linear-gradient(100deg, #8a9097 0%, #eef1f4 18%, #9aa1a9 36%, #ffffff 50%, #8a9097 64%, #d5d9de 82%, #8a9097 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: forge-fade 1.2s ease-out both, forge-shine 7s linear infinite;
+}
+h1::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 3px;
+  margin: 14px auto 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--molten), var(--molten-hot), var(--brand));
+  box-shadow: 0 0 12px rgba(255, 122, 26, .6);
+}
+@keyframes forge-shine { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+
+p {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 1.05em;
+  line-height: 1.6;
+  letter-spacing: .02em;
+}
+
+/* Heading block: stamped label between two rails */
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 26px 0 16px;
+  font-family: 'Oswald', 'Arial Narrow', sans-serif;
+  font-weight: 500;
+  font-size: .95em;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--molten-hot);
+}
+h2::before, h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--edge));
+}
+h2::after { background: linear-gradient(90deg, var(--edge), transparent); }
+
+a { color: var(--text); text-decoration: none; }
+a:hover { color: var(--molten-hot); }
+
+/* Social icons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.social-icon-div { padding-bottom: 22px; }
+.social-icon {
+  font-size: 28px;
+  padding: 10px;
+  color: #c9ced4;
+  transition: color .25s, text-shadow .25s;
+}
+.social-icon:hover { color: var(--molten-hot); text-shadow: 0 0 14px rgba(255, 122, 26, .7); }
+
+/* Misc
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.sharediv { z-index: 2; }
+.footer { color: var(--muted); }
+.spacing { padding: 0 10px; }
+svg { color: var(--text); }
+.badge { padding-bottom: 6px; }
+
+/* Reduced motion
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .parallax-background { display: none; }
+}

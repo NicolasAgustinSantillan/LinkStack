@@ -1,0 +1,37 @@
+/* Antares Blueprint — animations
+   Buttons are "drawn" from the center outwards, like lines on a plan. */
+
+.button-entrance {
+  animation: blueprint-plot .9s cubic-bezier(.2, .8, .2, 1) both;
+  animation-delay: calc(var(--delay) / 10);
+}
+
+@keyframes blueprint-plot {
+  from { opacity: 0; clip-path: inset(0 50% 0 50%); }
+  40%  { opacity: 1; }
+  to   { opacity: 1; clip-path: inset(-12px -12px -12px -12px); }
+}
+
+.fadein {
+  animation: blueprint-draw 1s ease-out both;
+}
+@keyframes blueprint-draw {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Hover */
+.button-hover, .credit-hover, .social-hover {
+  display: inline-block;
+  transform: perspective(1px) translateZ(0);
+}
+.button-hover:hover, .button-hover:focus, .button-hover:active { transform: translate(-3px, -3px); }
+.social-hover { transition: transform .25s; }
+.social-hover:hover, .social-hover:focus { transform: translateY(-3px); }
+.credit-hover:hover { transform: scale(1.04); }
+
+.icon-hover .hvr-icon { transition: transform .4s; }
+.icon-hover:hover .hvr-icon { transform: scale(1.12); }
+
+.footer-hover { display: inline-block; transition: transform .3s ease-out; }
+.footer-hover:hover { transform: translateY(-4px); }

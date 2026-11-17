@@ -1,0 +1,49 @@
+/* Antares Circuit — share button */
+
+.sharediv {
+  position: relative;
+  top: 24px;
+  right: 24px;
+  padding-bottom: 40px;
+}
+
+.sharebutton,
+sharebutton {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--panel);
+  cursor: pointer;
+  transition: border-color .3s, box-shadow .3s;
+}
+.sharebutton:hover {
+  border-color: var(--neon);
+  box-shadow: 0 0 16px rgba(122, 210, 28, .4);
+}
+
+.share-icon,
+.sharebutton .sharebutton-img {
+  color: var(--neon) !important;
+  font-size: 17px;
+}
+.sharebutton-mb { display: none; }
+
+.toastdiv { display: flex; align-items: center; justify-content: center; }
+.toastbox {
+  position: fixed;
+  top: 105%;
+  z-index: 2;
+  width: 280px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgba(5, 14, 9, .95);
+  color: var(--text);
+  text-align: center;
+  transition: transform .3s linear;
+}
+.toastbox.toast-tox--active { transform: translateY(-150px); }

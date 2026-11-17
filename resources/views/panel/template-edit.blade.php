@@ -71,6 +71,7 @@
           <option value="link">{{ __('messages.templates.type_link') }}</option>
           <option value="predefined">{{ __('messages.templates.type_predefined') }}</option>
           <option value="heading">{{ __('messages.templates.type_heading') }}</option>
+          <option value="email">{{ __('messages.templates.type_email') }}</option>
         </select>
       </div>
       <div class="col-md-3" data-show="predefined">
@@ -88,6 +89,9 @@
       <div class="col-md-4" data-show="link predefined">
         <label class="form-label small">URL</label>
         <input type="text" class="form-control" data-field="url" placeholder="https://">
+      </div>
+      <div class="col-md-4 d-flex align-items-end" data-show="email">
+        <span class="small text-muted pb-2">{{ __('messages.templates.email_hint') }}</span>
       </div>
     </div>
     <div class="d-flex flex-wrap justify-content-between align-items-center">
@@ -148,7 +152,7 @@
           type: type,
           button: type === 'predefined' ? field(row, 'button').value : null,
           title: field(row, 'title').value,
-          url: type === 'heading' ? '' : field(row, 'url').value,
+          url: (type === 'link' || type === 'predefined') ? field(row, 'url').value : '',
           site_icon: type === 'link' && field(row, 'site_icon').checked
         };
       });

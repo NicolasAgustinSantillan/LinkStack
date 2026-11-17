@@ -1,0 +1,49 @@
+/* Antares Keynote — share button (sits on the black cover band) */
+
+.sharediv {
+  position: relative;
+  top: 24px;
+  right: 24px;
+  padding-bottom: 40px;
+}
+
+.sharebutton,
+sharebutton {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  line-height: 42px;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid var(--brand);
+  background: rgba(17, 17, 17, .6);
+  cursor: pointer;
+  transition: background .3s;
+}
+.sharebutton:hover { background: var(--brand); }
+
+.share-icon,
+.sharebutton .sharebutton-img {
+  color: var(--brand) !important;
+  font-size: 17px;
+  transition: color .3s;
+}
+.sharebutton:hover .share-icon,
+.sharebutton:hover .sharebutton-img { color: var(--band) !important; }
+.sharebutton-mb { display: none; }
+
+.toastdiv { display: flex; align-items: center; justify-content: center; }
+.toastbox {
+  position: fixed;
+  top: 105%;
+  z-index: 2;
+  width: 280px;
+  padding: 10px;
+  background: var(--band);
+  color: #ffffff;
+  text-align: center;
+  box-shadow: inset 0 -4px 0 var(--brand);
+  transition: transform .3s linear;
+}
+.toastbox.toast-tox--active { transform: translateY(-150px); }

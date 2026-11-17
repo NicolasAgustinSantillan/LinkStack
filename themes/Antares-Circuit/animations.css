@@ -1,0 +1,41 @@
+/* Antares Circuit — animations
+   Buttons "boot" one after another: a quick flicker and a left-to-right reveal. */
+
+.button-entrance {
+  animation: circuit-load .8s ease-out both;
+  animation-delay: calc(var(--delay) / 9);
+}
+
+@keyframes circuit-load {
+  0%   { opacity: 0; clip-path: inset(0 100% 0 0); }
+  15%  { opacity: .9; }
+  25%  { opacity: .3; }
+  35%  { opacity: 1; }
+  100% { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+.fadein {
+  animation: circuit-boot .9s ease-out both;
+}
+@keyframes circuit-boot {
+  0%   { opacity: 0; }
+  30%  { opacity: .8; }
+  45%  { opacity: .2; }
+  100% { opacity: 1; }
+}
+
+/* Hover */
+.button-hover, .credit-hover, .social-hover {
+  display: inline-block;
+  transform: perspective(1px) translateZ(0);
+}
+.button-hover:hover, .button-hover:focus, .button-hover:active { transform: none; }
+.social-hover { transition: transform .25s; }
+.social-hover:hover, .social-hover:focus { transform: translateY(-3px); }
+.credit-hover:hover { transform: scale(1.04); }
+
+.icon-hover .hvr-icon { transition: transform .3s; }
+.icon-hover:hover .hvr-icon { transform: scale(1.12); }
+
+.footer-hover { display: inline-block; transition: transform .3s ease-out; }
+.footer-hover:hover { transform: translateY(-4px); }
