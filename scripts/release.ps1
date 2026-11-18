@@ -16,8 +16,11 @@ Write-Host "  ANTARES-LINKSTACK — Release Build"
 Write-Host "==================================="
 Write-Host ""
 
-# — Version (por defecto la de version.json)
-$appVersion = (Get-Content "$repoRoot\version.json" -Raw).Trim()
+# — Version (por defecto la del ultimo tag de git; si no hay tags, la de version.json)
+$appVersion = (git -C $repoRoot describe --tags --abbrev=0 2>$null) -replace '^v', ''
+if ([string]::IsNullOrWhiteSpace($appVersion)) {
+    $appVersion = (Get-Content "$repoRoot\version.json" -Raw).Trim()
+}
 $versionInput = Read-Host "  Version a publicar [default: $appVersion]"
 $VERSION = if ($versionInput.Trim() -eq "") { $appVersion } else { $versionInput.Trim() }
 Write-Host "  Version: $VERSION"

@@ -30,6 +30,7 @@
   @else
   <link rel="icon" type="image/svg+xml" href="{{ asset('assets/linkstack/images/logo.svg') }}">
   @endif
+  @include('components.apple-touch-icon')
 
   <link rel="stylesheet" href="{{ asset('assets/linkstack/css/brands.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/linkstack/css/animations.css') }}">

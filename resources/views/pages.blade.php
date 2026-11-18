@@ -12,7 +12,8 @@
       @else
       <link rel="icon" type="image/svg+xml" href="{{ asset('assets/linkstack/images/logo.svg') }}">
       @endif
-      
+      @include('components.apple-touch-icon')
+
       <!-- Library / Plugin Css Build -->
       <link rel="stylesheet" href="{{asset('assets/css/core/libs.min.css')}}" />
       

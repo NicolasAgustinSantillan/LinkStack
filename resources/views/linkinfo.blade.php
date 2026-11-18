@@ -19,7 +19,8 @@
       @else
       <link rel="icon" type="image/svg+xml" href="{{ asset('assets/linkstack/images/logo.svg') }}">
       @endif
-      
+      @include('components.apple-touch-icon')
+
       <script src="{{asset('assets/js/detect-dark-mode.js')}}"></script>
       <link rel="stylesheet" href="{{ asset('assets/external-dependencies/bootstrap-icons.css') }}">
 

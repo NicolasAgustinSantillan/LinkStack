@@ -20,9 +20,9 @@ return [
     'by' => 'by',
 
     'HOME.MESSAGE' => '
-    <p>Take control of your online presence with&nbsp;<a href="https://linkstack.org/"><strong>LinkStack</strong></a>
-     the privacy-focused, open-source <strong>link management platform</strong>. Create a customizable profile page to manage <strong>
-     all your important links in one convenient location</strong> and give your audience a seamless browsing experience.</p>
+    <p><strong>StarCard</strong>, the internal link hub of <strong>Antares Technologies</strong>. Centralize and
+     share your corporate links, resources, and contacts from a customizable profile page, built for our <strong>
+     Automation, IT, Robotics, and AI</strong> teams.</p>
      ',
 
 
@@ -751,10 +751,10 @@ return [
     */
 
     # Title Tag
-    'LinkStack setup' => 'LinkStack setup',
+    'LinkStack setup' => 'StarCard setup',
 
-    'Setup LinkStack' => 'Setup LinkStack',
-    'Welcome to the setup for LinkStack!' => 'Welcome to the setup for LinkStack!',
+    'Setup LinkStack' => 'Setup StarCard',
+    'Welcome to the setup for LinkStack!' => 'Welcome to the setup for StarCard!',
     'This setup will:' => 'This setup will:',
     'Check the server dependencies' => '1. Check the server dependencies',
     'Setup the database' => '2. Setup the database',

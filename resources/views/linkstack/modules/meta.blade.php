@@ -70,5 +70,6 @@
 @else
 <link rel="icon" type="image/svg+xml" href="{{ asset('assets/linkstack/images/logo.svg') }}">
 @endif
+@include('components.apple-touch-icon')
 
 @include('layouts.analytics')

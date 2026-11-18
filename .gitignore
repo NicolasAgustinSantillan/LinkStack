@@ -18,3 +18,4 @@ release/
 # Datos internos (no subir)
 /carga masiva/
 /docs/*.pptx
+/docs/*.pdf

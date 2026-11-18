@@ -142,9 +142,9 @@
                  @endif
                 @endforeach
         @else
-                <div style="--delay: {{ $initial++ }}s" class="button-entrance"><div class="button button-github button button-hover icon-hover"><img alt="button-icon" class="icon hvr-icon" src="{{ asset('assets/linkstack/icons/github.svg') }}">Github</div></div>
-                <div style="--delay: {{ $initial++ }}s" class="button-entrance"><div class="button button-twitter button button-hover icon-hover"><img alt="button-icon" class="icon hvr-icon" src="{{ asset('assets/linkstack/icons/twitter.svg') }}">Twitter</div></div>
-                <div style="--delay: {{ $initial++ }}s" class="button-entrance"><div class="button button-instagram button button-hover icon-hover"><img alt="button-icon" class="icon hvr-icon" src="{{ asset('assets/linkstack/icons/instagram.svg') }}">Instagram</div></div>
+                <div style="--delay: {{ $initial++ }}s" class="button-entrance"><a class="button button-custom_website button button-hover icon-hover" rel="noopener noreferrer nofollow" href="https://www.antaresautomation.com/" target="_blank"><img alt="button-icon" class="icon hvr-icon" src="https://www.google.com/s2/favicons?sz=256&domain=antaresautomation.com">Antares</a></div>
+                <div style="--delay: {{ $initial++ }}s" class="button-entrance"><a class="button button-custom_website button button-hover icon-hover" rel="noopener noreferrer nofollow" href="https://www.linkedin.com/company/antares-technologies-srl/posts/?feedView=all" target="_blank"><img alt="button-icon" class="icon hvr-icon" src="https://www.google.com/s2/favicons?sz=256&domain=linkedin.com">LinkedIn</a></div>
+                <div style="--delay: {{ $initial++ }}s" class="button-entrance"><a class="button button-custom_website button button-hover icon-hover" rel="noopener noreferrer nofollow" href="https://rigelargentina.com/" target="_blank"><img alt="button-icon" class="icon hvr-icon" src="https://www.google.com/s2/favicons?sz=256&domain=rigelargentina.com">Rigel Argentina</a></div>
         @endif
           
       </div>

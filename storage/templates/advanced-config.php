@@ -139,29 +139,29 @@ return [
     |
     */
 
-    'use_custom_buttons'  => 'true', // Set this to false if you wish to display the default dummy buttons.
+    'use_custom_buttons'  => 'false', // Set this to true if you wish to display the buttons below instead of the default demo links.
 
     'buttons' => array(
       array(
-        'button' => 'github',
-        'link' => 'https://github.com/linkstackorg/linkstack',
-        'title' => 'GitHub',
-        'icon' => '',
-        'custom_css' => ''
+        'button' => 'custom',
+        'link' => 'https://www.antaresautomation.com/',
+        'title' => 'Antares',
+        'icon' => 'fa-bolt',
+        'custom_css' => 'color:#7ad21c; background-color:#000000;'
       ),
       array(
-        'button' => 'linkstack',
-        'link' => 'https://linkstack.org',
-        'title' => 'Project Website',
+        'button' => 'linkedin',
+        'link' => 'https://www.linkedin.com/company/antares-technologies-srl/posts/?feedView=all',
+        'title' => 'LinkedIn',
         'icon' => '',
         'custom_css' => ''
       ),
       array(
         'button' => 'custom',
-        'link' => 'https://linkstack.org/donate',
-        'title' => 'Help us out',
-        'icon' => 'fa-hand-holding-heart',
-        'custom_css' => 'color:#ffffff; background-image:radial-gradient(circle, #4b1977 0%, #2b0081 95%);'
+        'link' => 'https://rigelargentina.com/',
+        'title' => 'Rigel Argentina',
+        'icon' => 'fa-star',
+        'custom_css' => 'color:#ffffff; background-color:#111111;'
       ),
     ),
 

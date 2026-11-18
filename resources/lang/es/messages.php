@@ -26,9 +26,9 @@ return array (
   'by' => 'por',
 
   'HOME.MESSAGE' => '
-  <p>Controla tu presencia en línea con&nbsp;<a href="https://linkstack.org/"><strong>LinkStack</strong></a>,
-   la plataforma de gestión de enlaces <strong>open-source</strong> centrada en la privacidad. Crea una página de perfil personalizable para gestionar <strong>
-   todos tus enlaces importantes en un solo lugar</strong> y ofrece a tu público una experiencia de navegación transparente.</p>
+  <p><strong>StarCard</strong>, el portal interno de enlaces de <strong>Antares Technologies</strong>. Centralizá
+   y compartí tus enlaces, recursos y contactos corporativos desde una página de perfil personalizable, pensada
+   para nuestros equipos de <strong>Automatización, IT, Robótica e Inteligencia Artificial</strong>.</p>
   ',
 
     /*
@@ -734,10 +734,10 @@ return array (
 */
 
 # Title Tag
-'LinkStack setup' => 'Configuración de LinkStack',
+'LinkStack setup' => 'Configuración de StarCard',
 
-'Setup LinkStack' => 'Instalación de LinkStack',
-'Welcome to the setup for LinkStack!' => '¡Bienvenido a la configuración de LinkStack!',
+'Setup LinkStack' => 'Instalación de StarCard',
+'Welcome to the setup for LinkStack!' => '¡Bienvenido a la configuración de StarCard!',
 'This setup will:' => 'Esta instalación hará:',
 'Check the server dependencies' => '1. Verificar las dependencias del servidor',
 'Setup the database' => '2. Configurar la base de datos',

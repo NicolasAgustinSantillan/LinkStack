@@ -741,6 +741,11 @@ class AdminController extends Controller
   //Shows config file editor page
   public function showConfig(request $request)
   {
+    // Fresh installs never get this file (it's only restored on updates from < 4.0.0 or via "Restore defaults")
+    if (!file_exists(base_path("config/advanced-config.php"))) {
+      copy(base_path("storage/templates/advanced-config.php"), base_path("config/advanced-config.php"));
+    }
+
     return view("/panel/config-editor");
   }
 

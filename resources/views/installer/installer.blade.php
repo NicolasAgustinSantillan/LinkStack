@@ -255,7 +255,7 @@ $("#select").change(function(){
 </script>
 
 <label>{{__('messages.App Name:')}}</label>
-<input style="max-width:275px;" class="form-control" value="LinkStack" name="app" type="text" required>
+<input style="max-width:275px;" class="form-control" value="StarCard" name="app" type="text" required>
 
 </div></div><br>
 <input type="hidden" name="_token" value="{{csrf_token()}}">

@@ -181,6 +181,22 @@ $(window).on('load', function() {
 <script type="text/javascript">$("iframe").load(function() { $("iframe").contents().find("a").each(function(index) { $(this).on("click", function(event) { event.preventDefault(); event.stopPropagation(); }); }); });</script>
 
 @push('sidebar-scripts')
+    <style>
+        .theme-preview-thumb {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .theme-preview-thumb img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+    </style>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
@@ -198,15 +214,11 @@ $(window).on('load', function() {
                         <div class="card shadow-lg @if($page->theme == "" or $page->theme == "default") bg-primary @else bg-soft-primary @endif">
                            <div class="card-body pb-0">
                             <a style="cursor:pointer;" onclick="setTheme('default')">
-                              <div class="d-flex justify-content-between">
-                                 <div>
-                                    <img draggable="false" class="bd-placeholder-img bd-placeholder-img-lg img-fluid" src="{{url('assets/linkstack/images/themes/default.png')}}">
-                                 </div>
+                              <div class="theme-preview-thumb">
+                                 <img draggable="false" class="bd-placeholder-img bd-placeholder-img-lg" src="{{url('assets/linkstack/images/themes/default.png')}}">
                               </div>
                               <div class="text-center">
-                                 <h2 class="m-3 @if($page->theme == "" or $page->theme == "default") text-white @else text-gray @endif"">Default Theme</h2>
-                                 <div>
-                                 </div>
+                                 <h2 class="mt-2 mb-2 fs-5 @if($page->theme == "" or $page->theme == "default") text-white @else text-gray @endif"">Default Theme</h2>
                               </div>
                             </a>
                            </div>
@@ -231,15 +243,11 @@ $(window).on('load', function() {
                                                             <div class="card shadow-lg @if($page->theme == $entry) bg-primary @else bg-soft-primary @endif">
                                                                <div class="card-body pb-0">
                                                                 <a style="cursor:pointer;" onclick="setTheme('{{$entry}}')">
-                                                                  <div class="d-flex justify-content-between">
-                                                                     <div>
-                                                                        <img draggable="false" class="bd-placeholder-img bd-placeholder-img-lg img-fluid" src="{{url('themes/'.$entry.'/preview.png')}}">
-                                                                     </div>
+                                                                  <div class="theme-preview-thumb">
+                                                                     <img draggable="false" class="bd-placeholder-img bd-placeholder-img-lg" src="{{url('themes/'.$entry.'/preview.png')}}">
                                                                   </div>
                                                                   <div class="text-center">
-                                                                     <h2 class="m-3 @if($page->theme == $entry) text-white @else text-gray @endif">{{$themeName}}</h2>
-                                                                     <div>
-                                                                     </div>
+                                                                     <h2 class="mt-2 mb-2 fs-5 @if($page->theme == $entry) text-white @else text-gray @endif">{{$themeName}}</h2>
                                                                   </div>
                                                                 </a>
                                                                </div>

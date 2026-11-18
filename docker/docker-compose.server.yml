@@ -5,6 +5,8 @@ services:
     image: registry.antaresautomation.com/antares-linkstack:latest
     container_name: linkstack
     restart: unless-stopped
+    ports:
+      - "5207:80"
     environment:
       - TZ=America/Argentina/Buenos_Aires
       - HTTP_SERVER_NAME=linkstack-qa.antaresautomation.com
