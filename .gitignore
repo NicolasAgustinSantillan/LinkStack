@@ -14,3 +14,7 @@ npm-debug.log
 yarn-error.log
 _ide_*
 release/
+
+# Datos internos (no subir)
+/carga masiva/
+/docs/*.pptx
